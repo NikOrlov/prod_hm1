@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from split_params import SplittingParams
+from .split_params import SplittingParams
 from marshmallow_dataclass import class_schema
 import yaml
 
