@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from .split_params import SplittingParams
+from split_params import SplittingParams
+from feature_params import FeatureParams
 from marshmallow_dataclass import class_schema
 import yaml
 
@@ -10,6 +11,7 @@ class TrainingPipelineParams:
     output_model_path: str
     metric_path: str
     splitting_params: SplittingParams
+    feature_params: FeatureParams
 
 
 TrainingPipelineParams_schema = class_schema(TrainingPipelineParams)
