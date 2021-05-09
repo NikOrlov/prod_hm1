@@ -29,6 +29,10 @@ def make_features(data: pd.DataFrame, features: TrainingPipelineParams) -> np.nd
     return transformer.fit_transform(data)
 
 
+def extract_target(data: pd.DataFrame, target: TrainingPipelineParams) -> pd.Series:
+    return data[target.feature_params.target_feature]
+
+
 if __name__ == '__main__':
     from data.make_dataset import read_data
     from entities.train_pipeline_params import read_training_pipeline_params
