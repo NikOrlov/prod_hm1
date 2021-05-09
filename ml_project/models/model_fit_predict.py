@@ -1,6 +1,7 @@
 from typing import Union, Dict
 import sklearn
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score, precision_score, recall_score
 from sklearn.compose import ColumnTransformer
@@ -10,13 +11,15 @@ import pickle
 import json
 from entities.train_pipeline_params import TrainingPipelineParams
 
-sklearn_model = Union[RandomForestClassifier]
+sklearn_model = Union[RandomForestClassifier, LogisticRegression]
 
 
 def train_model(dataset: pd.DataFrame, target: pd.Series, train_params: TrainingPipelineParams) -> sklearn_model:
     model_name = train_params.model
     if model_name == 'RandomForestClassifier':
         model = RandomForestClassifier()
+    if model_name == 'LogisticRegression':
+        model = LogisticRegression()
     else:
         raise NotImplementedError
     model.fit(dataset, target)
