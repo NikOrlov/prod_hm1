@@ -4,8 +4,8 @@
 Команды необходимо запускать из папки ml_project
 
 Настройка окружения:
-* ```conda create -n .test```
-* ```conda activate .test```
+* ```conda create -n .prod_hw1```
+* ```conda activate .prod_hw1```
 * ```conda install pip```
 * ```pip3 install -r requirements.txt```
 
