@@ -25,7 +25,7 @@ def predict_command(model_path: str, transformer_path: str,  input_path: str, ou
     with open(transformer_path, 'rb') as f:
         transformer = pickle.load(f)
     preds = predict(model, transformer, input_path)
-    np.savetxt(output_path, preds.astype(np.uint16))
+    np.savetxt(output_path, preds, fmt="%d", comments='')
 
 
 _, model_path, transformer_path, input_path, output_path = sys.argv
