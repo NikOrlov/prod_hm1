@@ -13,7 +13,7 @@ from entities.train_pipeline_params import TrainingPipelineParams
 sklearn_model = Union[RandomForestClassifier]
 
 
-def train_model(dataset: pd.DataFrame, target: pd.DataFrame, train_params: TrainingPipelineParams) -> sklearn_model:
+def train_model(dataset: pd.DataFrame, target: pd.Series, train_params: TrainingPipelineParams) -> sklearn_model:
     model_name = train_params.model
     if model_name == 'RandomForestClassifier':
         model = RandomForestClassifier()

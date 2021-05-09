@@ -18,15 +18,14 @@ def categorical_pipeline() -> Pipeline:
     return pipeline
 
 
-def build_pipeline(features: FeatureParams) -> ColumnTransformer:
-    transformer = ColumnTransformer([('numerical_part', numerical_pipeline(), features.feature_params.numerical_features),
-                                     ('categorical_part', categorical_pipeline(), features.feature_params.categorical_features)])
+def build_transformer(features: FeatureParams) -> ColumnTransformer:
+    transformer = ColumnTransformer([('numerical_part', numerical_pipeline(), features.numerical_features),
+                                     ('categorical_part', categorical_pipeline(), features.categorical_features)])
     return transformer
 
 
-def make_features(data: pd.DataFrame, features: FeatureParams) -> np.ndarray:
-    transformer = build_pipeline(features)
-    return transformer.fit_transform(data)
+def make_features(data: pd.DataFrame, transformer: ColumnTransformer) -> pd.DataFrame:
+    return transformer.transform(data)
 
 
 def extract_target(data: pd.DataFrame, target: FeatureParams) -> pd.Series:
@@ -40,5 +39,7 @@ if __name__ == '__main__':
     path_config = '../config/train_config.yaml'
     params = read_training_pipeline_params(path_config)
     dataset = read_data(path_data).drop(params.feature_params.target_feature, axis=1)
-    data_transformed = make_features(dataset, params)
+    transformer = build_transformer(params.feature_params)
+    transformer.fit(dataset)
+    data_transformed = make_features(dataset, transformer)
     assert data_transformed.shape == dataset.shape
