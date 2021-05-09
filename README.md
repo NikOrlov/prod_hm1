@@ -10,5 +10,8 @@
 * ```conda install pip```
 * ```pip3 install -r requirements.txt```
 
-Запуск пайплайна:
-```python train_pipeline.py config/train_config.yaml```
+Запуск пайплайна случайного леса:
+```python train_pipeline.py config/train_config_forest.yaml```
+
+Запуск пайплайна линейной модели:
+```python train_pipeline.py config/train_config_linear.yaml```
