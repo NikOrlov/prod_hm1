@@ -2,7 +2,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
-from entities.train_pipeline_params import TrainingPipelineParams
+from entities.train_pipeline_params import TrainingPipelineParams, FeatureParams
 import numpy as np
 import pandas as pd
 
@@ -18,19 +18,19 @@ def categorical_pipeline() -> Pipeline:
     return pipeline
 
 
-def build_pipeline(features: TrainingPipelineParams) -> ColumnTransformer:
+def build_pipeline(features: FeatureParams) -> ColumnTransformer:
     transformer = ColumnTransformer([('numerical_part', numerical_pipeline(), features.feature_params.numerical_features),
                                      ('categorical_part', categorical_pipeline(), features.feature_params.categorical_features)])
     return transformer
 
 
-def make_features(data: pd.DataFrame, features: TrainingPipelineParams) -> np.ndarray:
+def make_features(data: pd.DataFrame, features: FeatureParams) -> np.ndarray:
     transformer = build_pipeline(features)
     return transformer.fit_transform(data)
 
 
-def extract_target(data: pd.DataFrame, target: TrainingPipelineParams) -> pd.Series:
-    return data[target.feature_params.target_feature]
+def extract_target(data: pd.DataFrame, target: FeatureParams) -> pd.Series:
+    return data[target.target_feature]
 
 
 if __name__ == '__main__':
