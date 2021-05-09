@@ -18,7 +18,7 @@ def train_model(dataset: pd.DataFrame, target: pd.Series, train_params: Training
     model_name = train_params.model
     if model_name == 'RandomForestClassifier':
         model = RandomForestClassifier()
-    if model_name == 'LogisticRegression':
+    elif model_name == 'LogisticRegression':
         model = LogisticRegression()
     else:
         raise NotImplementedError
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     import data.make_dataset
     import entities.train_pipeline_params
     path_data = '../data/heart.csv'
-    path_config = '../config/train_config.yaml'
+    path_config = '../config/train_config_forest.yaml'
     path_model_save = '../models/model.pkl'
     path_model_metrics = '../models/metrics.json'
 

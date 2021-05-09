@@ -36,7 +36,7 @@ if __name__ == '__main__':
     from data.make_dataset import read_data
     from entities.train_pipeline_params import read_training_pipeline_params
     path_data = '../data/heart_nan.csv'
-    path_config = '../config/train_config.yaml'
+    path_config = '../config/train_config_forest.yaml'
     params = read_training_pipeline_params(path_config)
     dataset = read_data(path_data).drop(params.feature_params.target_feature, axis=1)
     transformer = build_transformer(params.feature_params)

@@ -25,5 +25,5 @@ def read_training_pipeline_params(path: str) -> TrainingPipelineParams:
 
 
 if __name__ == "__main__":
-    training_params = read_training_pipeline_params('../config/train_config.yaml')
+    training_params = read_training_pipeline_params('../config/train_config_forest.yaml')
     print(training_params)
