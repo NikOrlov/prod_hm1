@@ -2,7 +2,7 @@ from typing import Union, Dict
 import sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from sklearn.metrics import accuracy_score, roc_auc_score, f1_score, precision_score, recall_score
 from sklearn.compose import ColumnTransformer
 import pandas as pd
 import numpy as np
@@ -29,9 +29,11 @@ def predict_model(pipeline: Pipeline, dataset: pd.DataFrame) -> np.ndarray:
 
 
 def evaluate_model(predictions: np.ndarray, target: pd.Series) -> Dict[str, float]:
-    result = {'r2_score': r2_score(target, predictions),
-              'mse_score': mean_squared_error(target, predictions),
-              'mae': mean_absolute_error(target, predictions)}
+    result = {'accuracy': round(accuracy_score(target, predictions), 4),
+              'roc_auc': round(roc_auc_score(target, predictions), 4),
+              'f1': round(f1_score(target, predictions), 4),
+              'precision': round(precision_score(target, predictions), 4),
+              'recall': round(recall_score(target, predictions), 4)}
     return result
 
 
